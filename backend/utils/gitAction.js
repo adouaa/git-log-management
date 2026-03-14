@@ -34,7 +34,7 @@ const commitGit = async (absolutePath, message) => {
         // git.branch() 返回一个对象，其中 'current' 属性是当前分支名
         const branchSummary = await git.branch();
         const branch = branchSummary.current; // <--- 必须先从 branchSummary 中取出 current
-
+        const remoteName = "origin"; // 通常远程名称是 origin
         if (!branch) {
           throw new Error("无法获取当前分支名称（可能处于分离头指针状态）");
         }
@@ -42,6 +42,20 @@ const commitGit = async (absolutePath, message) => {
         console.log(`当前分支: ${branch}`);
         await git.add(".");
         await git.commit(message);
+        // 先 Pull (拉取远程代码并合并)
+        // 这会自动 fetch 并 merge 远程的变更到本地
+        const pullResult = await git.pull(remoteName, branch);
+        if (
+          pullResult.summary.changes > 0 ||
+          pullResult.summary.insertions > 0 ||
+          pullResult.summary.deletions > 0
+        ) {
+          console.log(
+            `[0] 已同步远程变更：+${pullResult.summary.insertions} -${pullResult.summary.deletions}`,
+          );
+        } else {
+          console.log(`[0] 本地已是最新，无需同步。`);
+        }
         const res = await git.push(remote, branch);
         console.log("res------------>: ", res);
         return true;
