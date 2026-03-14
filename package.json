@@ -1,0 +1,29 @@
+{
+  "name": "git-commit-log-manager",
+  "version": "1.0.0",
+  "description": "Git提交日志管理工具",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && cross-env PORT=8081 nodemon app.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "cd frontend && npm run build",
+    "start": "cd backend && node app.js"
+  },
+  "keywords": [
+    "git",
+    "commit",
+    "log",
+    "manager"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^10.1.0"
+  },
+  "dependencies": {
+    "koa-static": "^5.0.0"
+  }
+}
