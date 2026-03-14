@@ -735,7 +735,7 @@ app.use(async (ctx) => {
 
       console.log("commitMessage: ", commitMessage);
 
-      commitGit(path, commitMessage);
+      await commitGit(path, commitMessage);
 
       ctx.body = {
         success: true,
