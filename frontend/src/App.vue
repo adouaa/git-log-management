@@ -102,11 +102,16 @@
           <template #default="scope">
             <div class="action-buttons">
               <el-button size="small" @click="editLog(scope.row)">编辑</el-button>
-              <el-button size="small" type="danger" @click="deleteLog(scope.row.id)">删除</el-button>
+              <el-popconfirm title="确定要删除该条记录吗？" @confirm="deleteLog(scope.row.id)" confirm-button-text="确定"
+                cancel-button-text="取消" type="warning">
+                <template #reference>
+                  <el-button size="small" type="danger">删除</el-button>
+                </template>
+              </el-popconfirm>
               <el-popconfirm title="确定要提交该条记录吗？" @confirm="handleAutoCommit(scope.row)" confirm-button-text="确定"
                 cancel-button-text="取消" type="warning">
                 <template #reference>
-                  <el-button type="primary">一键提交</el-button>
+                  <el-button size="small" type="primary">一键提交</el-button>
                 </template>
               </el-popconfirm>
             </div>
@@ -150,7 +155,7 @@
           <div class="tag-list" v-if="form.tags.length > 0">
             <el-tag v-for="(tag, index) in form.tags" :key="index" size="small" closable @close="removeTag(index)">{{
               tag
-              }}</el-tag>
+            }}</el-tag>
           </div>
         </el-form-item>
       </el-form>
@@ -184,7 +189,13 @@
           <el-table-column label="操作" width="150">
             <template #default="scope">
               <el-button size="small" @click="editProject(scope.row)">编辑</el-button>
-              <el-button size="small" type="danger" @click="deleteProject(scope.row.id)">删除</el-button>
+              <el-popconfirm title="确定要删除这个项目吗？" @confirm="deleteProject(scope.row.id)" confirm-button-text="确定"
+                cancel-button-text="取消" type="warning">
+                <template #reference>
+                  <el-button size="small" type="danger">删除</el-button>
+                </template>
+              </el-popconfirm>
+
             </template>
           </el-table-column>
         </el-table>
@@ -233,7 +244,13 @@
           <el-table-column label="操作" width="150">
             <template #default="scope">
               <el-button size="small" @click="editCategory(scope.row)">编辑</el-button>
-              <el-button size="small" type="danger" @click="deleteCategory(scope.row)">删除</el-button>
+              <el-popconfirm title="确定要删除这个分类吗？" @confirm="deleteCategory(scope.row)" confirm-button-text="确定"
+                cancel-button-text="取消" type="warning">
+                <template #reference>
+                  <el-button size="small" type="danger">删除</el-button>
+                </template>
+              </el-popconfirm>
+
             </template>
           </el-table-column>
         </el-table>
