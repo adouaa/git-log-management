@@ -7,7 +7,6 @@ const isDev = import.meta.env.MODE === "development";
 // 创建axios实例
 const instance = axios.create({
   baseURL: isDev ? "/api" : "",
-  timeout: 10000,
 });
 
 // 请求拦截器
