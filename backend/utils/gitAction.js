@@ -32,9 +32,11 @@ const commitGit = async (absolutePath, message) => {
       try {
         await git.add(".");
         await git.commit(message);
-        await git.push(remote, branch);
+        const res = await git.push(remote, branch);
+        console.log("res------------>: ", res);
         return true;
       } catch (error) {
+        console.log("error------------>: ", error);
         return false;
       }
     }
