@@ -44,7 +44,7 @@ const commitGit = async (absolutePath, message) => {
         await git.commit(message);
         // 先 Pull (拉取远程代码并合并)
         // 这会自动 fetch 并 merge 远程的变更到本地
-        const pullResult = await git.pull(remoteName, branch);
+        const pullResult = await git.pull(remoteName, branch, ['--allow-unrelated-histories']);
         if (
           pullResult.summary.changes > 0 ||
           pullResult.summary.insertions > 0 ||
