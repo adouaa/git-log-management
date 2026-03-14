@@ -46,11 +46,13 @@
 1. **克隆项目**
 
 2. **安装依赖**
+
    ```bash
    npm install
    ```
 
 3. **启动项目**
+
    ```bash
    npm run dev
    ```
@@ -163,3 +165,7 @@ project-root/
 ## 许可证
 
 MIT
+
+# git-log-management
+
+a system which can record your project change log and can automaticlly do some git actions
