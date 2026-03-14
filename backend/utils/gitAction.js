@@ -40,8 +40,10 @@ const commitGit = async (absolutePath, message) => {
         }
 
         console.log(`当前分支: ${branch}`);
-        await git.add(".");
-        await git.commit(message);
+        const addRes =  await git.add(".");
+        console.log("addRes: ", addRes);
+        const commitRes = await git.commit(message);
+        console.log("commitRes: ", commitRes);
         // 先 Pull (拉取远程代码并合并)
         // 这会自动 fetch 并 merge 远程的变更到本地
         const pullResult = await git.pull(remoteName, branch, ['--allow-unrelated-histories']);
