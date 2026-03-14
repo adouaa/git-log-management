@@ -30,6 +30,16 @@ const commitGit = async (absolutePath, message) => {
     } else {
       console.log("远程仓库remote:", remote);
       try {
+        // 正确获取当前分支名称
+        // git.branch() 返回一个对象，其中 'current' 属性是当前分支名
+        const branchSummary = await git.branch();
+        const branch = branchSummary.current; // <--- 必须先从 branchSummary 中取出 current
+
+        if (!branch) {
+          throw new Error("无法获取当前分支名称（可能处于分离头指针状态）");
+        }
+
+        console.log(`当前分支: ${branch}`);
         await git.add(".");
         await git.commit(message);
         const res = await git.push(remote, branch);
